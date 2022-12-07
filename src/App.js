@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useEffect } from "react"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./component/Head/Header"
+import Home from "./component/Hero/Home"
+import Resume from "./component/Resume/Resume"
+import "./App.css"
+import Services from "./component/Features/Services"
+import Projects from "./component/Features/Projects"
+import Contact from "./component/Contact/Contact"
+import Footer from "./component/Footer/Footer"
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-function App() {
+
+
+const App = () => {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Router>
+        <Header />
+        <Routes>
+        <Route path="/" element={<Fragment><Home/><Services/><Projects/><Resume/><Contact/></Fragment>}/>
+        <Route path="/project" element={<Fragment><Projects/></Fragment>}/>
+        </Routes>
+        <Footer />
+      </Router>
+    </>
+  )
 }
 
-export default App;
+export default App
